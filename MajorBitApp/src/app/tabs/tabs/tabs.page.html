@@ -1,0 +1,15 @@
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+  
+    <ion-tab-button *ngFor="let tab of tabs" (click)="goToParent(tab.Nome,tab.Tipologia)" >
+      <ion-icon [name]="tab.APPIcon" ></ion-icon>
+      <ion-label>{{tab.Nome}}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="search" >
+      <ion-icon name="search-outline"></ion-icon>
+      <ion-label>Cerca</ion-label>
+    </ion-tab-button>
+</ion-tab-bar>
+
+</ion-tabs>

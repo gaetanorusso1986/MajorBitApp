@@ -1,0 +1,28 @@
+
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      
+    </ion-buttons>
+    <ion-title class="logo">
+    
+      <img src="../../../assets/icon/Logo_piccolo.png" />
+    
+  </ion-title>
+  
+    <ion-buttons slot="end">
+      <ion-button (click)="AccountPage()"  *ngIf="loggedIn">   
+        <ion-icon size="large" name="person-circle-outline"></ion-icon>
+        <!-- <ion-label>Profilo</ion-label> -->
+      </ion-button>  
+      <ion-button (click)="LoginPage()" *ngIf="!loggedIn">
+        <ion-icon size="large" name="log-in-outline"></ion-icon>
+        <!-- <ion-label>Accedi</ion-label> -->
+      </ion-button>
+      <!-- <ion-button (click)="SearchPage()" >
+        <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+      </ion-button> -->
+    </ion-buttons>
+  
+  </ion-toolbar>
+  

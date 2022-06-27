@@ -1,29 +1,73 @@
-<ion-app>
-  <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay">
+<ion-app [class.dark-theme]="dark">
+  <ion-split-pane   contentId="main-content">
+
+    <!-- <ion-menu *ngIf="loggedIn" contentId="main-content"> -->
+      <ion-menu  contentId="main-content"> 
       <ion-content>
-        <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi@ionicframework.com</ion-note>
-
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
-
-          <ion-item *ngFor="let label of labels" lines="none">
-            <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-            <ion-label>{{ label }}</ion-label>
+      
+        <ion-list lines="none">
+          <ion-item-divider>
+          <ion-list-header  *ngIf="loggedIn">
+            Benvenut* - {{username}}
+          </ion-list-header>
+        </ion-item-divider>
+      
+  
+          <ion-item *ngFor="let p of appPages; let i=index;" [routerDirection]="'root'"  [disabled]="p.Abilitato==0 ? true:false"  [ngClass]="{active: isLevel1Shown('idx'+i)}">          
+            <div *ngIf = "p.Children == undefined || p.Children.lenght==0; else elsetag">              
+              <ion-label (click)="redirect_page(p.Nome,null,null,null, p.PageType,p.Tipologia)">
+                <ion-icon [name]="p.APPIcon" slot="start"></ion-icon> 
+                  {{p.Nome}}
+                </ion-label>
+            </div>
+            <ng-template #elsetag>               
+            <ion-label>
+              <span (click)="toggleLevel1('idx'+i)">
+              <ion-icon [name]="p.APPIcon" slot="start"></ion-icon> 
+               {{p.Nome}}
+              <ion-icon style="float:right;" [name]="isLevel1Shown('idx'+i) ? 'chevron-down-outline' : 'chevron-forward-outline'" slot="end"></ion-icon>  
+            </span>
+              <ul *ngIf="isLevel1Shown('idx'+i)" class="level1">
+                <li *ngFor="let i1 of p.Children; let j=index;"  [ngClass]="{active: isLevel2Shown('idx'+i+'idx'+j)}">
+                  
+                  <div  [disabled]="p.Abilitato==0 ? true:false" *ngIf = "i1.Children == undefined || i1.Children.lenght==0; else elsetagchildren">              
+                    <ion-label (click)="redirect_page(i1.Nome,null,null,null,i1.PageType,i1.Tipologia)">
+                      <ion-icon [name]="i1.APPIcon" slot="start"></ion-icon> 
+                        {{i1.Nome}}
+                      </ion-label>
+                  </div>
+                  <ng-template #elsetagchildren> 
+                    <ion-label  (click)="toggleLevel7('idx'+i)">
+                      <ion-icon [name]="i1.APPIcon" slot="start"></ion-icon> 
+                     
+                      {{i1.Nome}}
+                      <ion-icon style="float:right;" [name]="isLevel2Shown('idx'+i) ? 'chevron-down-outline' : 'chevron-forward-outline'" slot="end"></ion-icon>  
+                      <ul *ngIf="isLevel2Shown('idx'+i)" class="level2">
+                        <li *ngFor="let i2 of i1.Children; let j=index;"  [disabled]="i2.Abilitato==0 ? false:true" [ngClass]="{active: isLevel3Shown('idx'+i+'idx'+j)}">
+                        <!-- la gestione per il figlio è passare il nome, categoria e sotto categoria-->
+                            <ion-label (click)="redirect_page(i2.Nome,null,null,null,i2.PageType, i2.Tipologia)">
+                              <ion-icon [name]="i2.APPIcon" slot="start"></ion-icon> 
+                                {{i2.Nome}}
+                              </ion-label>
+                              </li>            
+                            </ul>
+                    </ion-label>
+                  </ng-template>
+                </li>            
+              </ul>
+            </ion-label>
+          </ng-template>
+      
           </ion-item>
         </ion-list>
+
+        
+
       </ion-content>
     </ion-menu>
+
     <ion-router-outlet id="main-content"></ion-router-outlet>
+
   </ion-split-pane>
+
 </ion-app>
