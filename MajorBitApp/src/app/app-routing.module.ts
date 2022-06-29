@@ -7,21 +7,26 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  },
-  
-
-  
-
-  {
-    path: 'tabs',
-    loadChildren: () => import('./tabs/tabs/tabs.module').then( m => m.TabsPageModule)
+    path: 'app',
+    loadChildren: () => import('./tabs/tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'search',
-    loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
-  }
+    path: 'account',
+    loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'change-password',
+    loadChildren: () => import('./change-password/change-password.module').then( m => m.ChangePasswordPageModule)
+  },
+  // {
+  //   path: 'tabs',
+  //   loadChildren: () => import('./tabs/tabs/tabs.module').then( m => m.TabsPageModule)
+  // },
+  
 ];
 
 @NgModule({

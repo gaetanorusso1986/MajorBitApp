@@ -1,0 +1,49 @@
+
+<ion-content>
+  <div text-center class="logo">
+    <img src="../../../assets/icon/logo.png" />
+  </div>
+  <form #loginForm="ngForm" novalidate>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating" >Username</ion-label>
+        <ion-input [(ngModel)]="login.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
+          required>
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger">
+        <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
+          Campo obbligatorio
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating" >Password</ion-label>
+        <ion-input [(ngModel)]="login.password" [type]="getType()" name="password" type="password" #password="ngModel" required>
+        </ion-input>
+        <ion-icon name="eye" slot="end" class="colorIcon" (click)="toggleTextPassword()"></ion-icon>
+      </ion-item>
+     
+     
+        
+
+      <ion-text color="danger">
+        <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
+          Campo obbligatorio
+        </p>
+      </ion-text>
+      <div style="margin-top: 25px; margin-left: 15px;margin-bottom: 26px;">
+        <a href="#" (click)="Open()">Regolamento e privacy</a>
+        
+      </div>
+    </ion-list>
+    
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="onLogin(loginForm)" type="submit"  expand="block">Login</ion-button>
+      </ion-col>      
+    </ion-row>
+  </form>
+  
+</ion-content>

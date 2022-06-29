@@ -1,0 +1,55 @@
+
+
+<ion-header>
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button text='' defaultHref="/app/tabs"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="title">Profilo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">   
+        <ion-icon size="large" name="log-out-outline"></ion-icon>
+        <ion-label>Esci</ion-label>
+      </ion-button>  
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ng-container *ngIf="userload">
+<ion-content>
+  <form (submit)="update()">
+    <p *ngIf="error" style="text-align: center">{{error.message}}</p>
+    <ion-list>
+  
+        <ion-item>
+            <ion-label floating>Nome: {{userload.firstName}}</ion-label>
+            <!-- <ion-input type="text" [(ngModel)]="userload.firstName" disabled="true" disabled="true" name="nome"></ion-input> -->
+          </ion-item>
+    
+        
+    
+          <ion-item>
+            <ion-label floating>Cognome: {{userload.lastName}}</ion-label>
+            <!-- <ion-input type="text" [(ngModel)]="userload.lastName" name="cognome" disabled="true"></ion-input> -->
+          </ion-item> 
+
+
+      <ion-item>
+        <ion-label floating>Email: {{userload.email}}</ion-label>
+        <!-- <ion-input type="text"[(ngModel)]="userload.email" name="email"></ion-input> -->
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Organizzazione: {{userload.companyName}}</ion-label>
+        <!-- <ion-input type="text"[(ngModel)]="userload.companyName" name="companyName" disabled="true"> </ion-input> -->
+      </ion-item>
+      <div padding>
+        <!-- <ion-button  class="btnprimary" expand="block" disabled>Aggiorna</ion-button> -->
+      </div>
+      
+    
+
+    </ion-list>
+  </form>
+  <ion-button color="primary" class="btnprimary" expand="block" (click)="changePassword()">Cambia Password</ion-button>
+  
+</ion-content>
+</ng-container>

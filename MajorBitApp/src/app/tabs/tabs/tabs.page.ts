@@ -16,6 +16,7 @@ export class TabsPage implements OnInit {
   constructor( private userData: User,public router: Router,public service: ConfigurationService) { }
 
   ngOnInit() {
+    
     this.getMenu();
     this.checkLoginStatus();
     this.listenForLoginEvents();
@@ -69,7 +70,7 @@ export class TabsPage implements OnInit {
         "",
       ]);
     }else{
-    this.router.navigate(['tabs/single-page', tipologia]);
+    this.router.navigate(['tabs/generic', tipologia]);
     }
   }
 }

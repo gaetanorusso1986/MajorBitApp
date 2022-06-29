@@ -1,9 +1,35 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>search</ion-title>
-  </ion-toolbar>
+  <app-header></app-header>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <ion-searchbar
+    placeholder="Ricerca"
+    [(ngModel)]="search"
+    (ionInput)="onInput($event.target.value)"
+    animated
+  ></ion-searchbar>
+  <div *ngIf="resultList==null ||  resultList.length == 0">
+    <ion-grid>
+      <ion-row>
+    
+        <ion-col>
+          <div class="ion-text-center">
+            <ion-icon name="warning-outline"></ion-icon>
+          Nessun risulato trovato 
+          </div>
+        </ion-col>
+     
+      </ion-row>
+    </ion-grid>
+  </div>
+  <ion-list>
+    <ion-item
+      *ngFor="let result of resultList; let i=index"
+      (click)="Details(result.IdStr)"
+    >
+      {{result.Titolo}}
+    </ion-item>
+  </ion-list>
 
 </ion-content>

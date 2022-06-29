@@ -5,16 +5,53 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'tabs',
     component: TabsPage,
     children: [
       {
         path: 'search',
         loadChildren: () =>
           import('../../search/search.module').then((m) => m.SearchPageModule),
-      }
+      },
+      {
+        path: '',
+        redirectTo: '/tabs/generic',
+        pathMatch: 'full',
+      },
+      {
+        path: 'generic',
+        loadChildren: () =>
+          import('../../generic/generic.module').then((m) => m.GenericPageModule),
+      },
+      {
+        path: 'login',
+        loadChildren: () => import('../../login/login.module').then( m => m.LoginPageModule)
+      },
+      {
+        path: 'change-password',
+        loadChildren: () =>
+          import('../../change-password/change-password.module').then(
+            (m) => m.ChangePasswordPageModule
+          ),
+      },
+      {
+        path: 'account',
+        loadChildren: () =>
+          import('../../account/account.module').then(
+            (m) => m.AccountPageModule
+          ),
+      },
+      {
+        path: 'generic/:tipologia',
+        loadChildren: () =>
+        import('../../generic/generic.module').then((m) => m.GenericPageModule),
+      },
     ]
-  }
+  }, {
+    path: '',
+    redirectTo: '/tabs/generic',
+    pathMatch: 'full',
+  },
 ];
 
 // const routes: Routes = [
